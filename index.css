@@ -1,0 +1,172 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  /* TODO change fonts on redesign */
+  /* background-color: #272C35; /* night blue */
+  background-color: rgb(50, 50, 50);
+  /* night gray */
+}
+
+/* backgound image */
+.backgroudImage {
+  align-self: top;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* editor styling */
+.editor {
+  resize: none;
+  box-shadow: 0 0 10px #000000;
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  bottom: 25px;
+  font-size: 16px;
+  color: #FFFFFF;
+  background-color: rgb(60, 60, 60, 0.7);
+  backdrop-filter: blur(3px);
+  padding: 5px;
+  border: 0px;
+}
+
+.editor:focus {
+  outline: none !important;
+  border: 0px;
+  box-shadow: 0 0 10px #000000;
+}
+
+/* Status Bar */
+.statusBar {
+  background-color: #0074D0;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 25px;
+}
+
+/* Status link a - wraps all status elements */
+.statusBar a {
+  float: left;
+  color: #f2f2f2;
+  font-size: 14px;
+  text-align: center;
+  padding: 4px;
+  text-decoration: none;
+}
+
+/* Status images in status elements - all set same size - fit bar*/
+.statusBar img {
+  width: 21px;
+  height: 21px;
+}
+
+.resultList {
+  color: white;
+  list-style: none;
+  /* remove dots of list cause they suck */
+  position: fixed;
+  /* Sit on top of the page content */
+  /* Full width (cover the whole page) */
+  height: calc(100% - 130px);
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+
+  cursor: pointer;
+  margin-left: -30px;
+  margin-top: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0, 0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255, 1);
+}
+
+
+li {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-right: 10px;
+  background-color: rgb(0, 116, 208, 1);
+  /*background: rgba(50, 50, 50, 0.3);*/
+  backdrop-filter: blur(5px);
+  border-radius: 6px;
+  padding: 5px;
+
+
+  /* Bubbles
+  display: inline-block;*/
+  /*Makes them stick to the left*/
+  display: table;
+  word-break: break-all;
+
+
+
+}
+
+li a {
+  color: rgb(255, 255, 255);
+}
+
+li a:hover {
+  color: rgb(200, 200, 200);
+}
+
+#view {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.blur {
+  animation: blur 2s;
+  animation-fill-mode: forwards;
+}
+
+
+
+@keyframes blur {
+  0% {
+    backdrop-filter: blur(0px);
+  }
+
+  25% {
+    backdrop-filter: blur(1px);
+  }
+
+  50% {
+
+    backdrop-filter: blur(3px);
+  }
+
+  100% {
+    backdrop-filter: blur(4px);
+
+  }
+}

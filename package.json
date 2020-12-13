@@ -1,0 +1,33 @@
+{
+    "name": "reventlou",
+    "version": "1.0.0",
+    "description": "Information Management System",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "lint": "tslint -c tslint.json -p tsconfig.json",
+        "start": "npm run build && electron ./dist/index.js",
+        "clean": "rm -rf node_modules",
+        "reinstall": "npm run clean && npm install",
+        "rebuild node part": "npm run clean && npm install && npm run build",
+        "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+        "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Information Management System\"",
+        "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
+        "create-installer-mac": "electron-installer-dmg ./release-builds/Electron\\ tutorial\\ app-darwin-x64/Electron\\ tutorial\\ app.app electron-tutorial-app --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns"
+    },
+    "author": "b3z",
+    "license": "",
+    "dependencies": {
+        "@tsed/logger": "^5.5.3",
+        "@types/config": "0.0.36",
+        "@types/redis": "^2.8.27",
+        "@types/showdown": "^1.9.3",
+        "config": "^3.3.1",
+        "electron": "^10.1.1",
+        "highlight.js": "^10.2.0",
+        "redis": "^3.0.2",
+        "redis-redisearch": "^1.0.1",
+        "showdown": "^1.9.1"
+    }
+}

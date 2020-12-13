@@ -1,0 +1,22 @@
+/*
+IMS default config file.
+(c) 2020 Zeppel
+These options are the options we recommend for small and medium databases.
+*/
+{
+    index: {
+        words: true, // Add words to the index on save. This is necessary if you want to use words only search.
+        chars: true, // You can also tick this false. But then you will neber find anything. Only if you use words as idnexing you can disable this.
+    },
+    search: {
+        words: true, // Search for whole words. Won't support chars (not even in combination).
+        chars: false, // Search for chars only. Has the words effect plus inner word search. (will return massive results on big databases.)
+    },
+    file: {
+        archive: "archive", // Path where files are supposed to be saved.
+    },
+    log: {
+        path: "logs/ims.log", // Path where logfile is saved.
+        silent: false, // Don't show logs in terminal.
+    },
+}
