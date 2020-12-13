@@ -1,1 +1,1 @@
-./redis-server --loadmodule modules/redisearch.so
+./server/redis-server --loadmodule server/modules/redisearch.so
