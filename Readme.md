@@ -6,6 +6,8 @@
 
 IMS is a database which stores all type of things. It is like a notes app on steroids and without any structure. Docs, Text, ... are saved as a "note" and are indexed so they can be found by using a search.
 
+<div style="text-align:center"><img src="assets/screenshot.png" /></div>
+
 ### More About
 
 So as the summary explains it is a database which doesn't have any structure. Things are just stored and indexed and found again by a search.
