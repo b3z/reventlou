@@ -4,6 +4,7 @@
     "description": "Information Management System",
     "main": "index.js",
     "scripts": {
+        "server": "sh server/server.sh",
         "build": "tsc",
         "watch": "tsc -w",
         "lint": "tslint -c tslint.json -p tsconfig.json",
