@@ -16,7 +16,7 @@ updates:
       - "npm"
 
   - package-ecosystem: "github-actions"
-    directory: "lint.yml"
+    directory: ".github/workflows/"
     schedule:
       interval: "daily"
     reviewers:
