@@ -18,7 +18,7 @@
         "create-installer-mac": "electron-installer-dmg ./release-builds/Electron\\ tutorial\\ app-darwin-x64/Electron\\ tutorial\\ app.app electron-tutorial-app --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns"
     },
     "author": "b3z",
-    "license": "",
+    "license": "MIT",
     "dependencies": {
         "@tsed/logger": "^5.5.3",
         "@types/config": "0.0.36",
