@@ -25,7 +25,8 @@ export class Database {
     }
 
     save(data: string): any {
-        this.client.ft_add(["index", md5(data), "1.0", "FIELDS", "data", data], (err: any) => {
+        // adding to index: docID = hash, score = 1.0 with FILEDS data = the date we pass.
+        this.client.ft_add(["index", md5(data), "1.0", "FIELDS", "data", data], (err: Error) => {
             log.error(err);
         });
 
@@ -34,19 +35,21 @@ export class Database {
 
     async search(query: string): Promise<string[]> {
         return new Promise<string[]>((resolve) => {
-            this.client.ft_search(["index", query], (err: any, result: any) => {
-                if (err) log.error(err);
+            this.client.ft_search(["index", query], (err: Error, result: any) => {
+                if (err)
+                    log.error(err);
+                
                 resolve(result);
             });
         });
     }
     //TODO for now returns nothing TODO make async
-    suggest(input: string): void {
-        this.client.ft_sugget(["index", input, "FUZZY"], (err: any, result: any) => {
-            if (err) log.error(err);
-            log.info(result);
-        });
-    }
+    // suggest(input: string): void {
+    //     this.client.ft_sugget(["index", input, "FUZZY"], (err: any, result: any) => {
+    //         if (err) log.error(err);
+    //         log.info(result);
+    //     });
+    // }
 
     public exists(key: string) {
         if (key == null || key.length == 0) throw new Error("Illegal Argument.");

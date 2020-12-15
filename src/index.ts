@@ -1,7 +1,7 @@
 import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
 import * as path from "path";
 import { Database } from "./database";
-import { translate } from "./htmlRenderer";
+// import { translate } from "./htmlRenderer";
 import { isValid } from "./validateConfig";
 import { copy2archive } from "./fileHandler";
 import * as config from "config";
@@ -224,7 +224,8 @@ ipcMain.on("editor:save:value", function (e, value) {
 });
 
 ipcMain.on("editor:suggest:value", function (e, value) {
-    db.suggest(value);
+    //db.suggest(value);
+    log.debug("Needs implementation.") // TODO --> see db, github #1
 });
 
 // catch item:search from editor with the editors value.
