@@ -1,7 +1,6 @@
 import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
 import * as path from "path";
 import { Database } from "./database";
-//import { startServer } from "./redisServer";
 import { translate } from "./htmlRenderer";
 import { isValid } from "./validateConfig";
 import { copy2archive } from "./fileHandler";
