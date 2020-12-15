@@ -11,7 +11,6 @@ if (!get("log.silent")) {
         layout: { type: "colored" },
         level: ["debug", "info", "error", "fatal", "warn"],
     });
-} else {
 }
 
 log.appenders.set("everything", {
