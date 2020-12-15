@@ -16,7 +16,7 @@ updates:
       - "npm"
 
   - package-ecosystem: "github-actions"
-    directory: ".github/workflows/"
+    directory: "/"
     schedule:
       interval: "daily"
     reviewers:
