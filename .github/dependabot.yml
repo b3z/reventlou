@@ -9,9 +9,9 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    default_reviewers:
+    reviewers:
       - "b3z"
-    default_labels:
+    labels:
       - "dependency"
       - "npm"
 
@@ -19,7 +19,7 @@ updates:
     directory: "/.github/workflows"
     schedule:
       interval: "daily"
-    default_reviewers:
+    reviewers:
       - "b3z"
-    default_labels:
+    labels:
       - "dependency"
