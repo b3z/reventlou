@@ -29,6 +29,7 @@
         "highlight.js": "^10.2.0",
         "redis": "^3.0.2",
         "redis-redisearch": "^1.0.1",
-        "showdown": "^1.9.1"
+        "showdown": "^1.9.1",
+        "tslint": "^6.1.3"
     }
 }
