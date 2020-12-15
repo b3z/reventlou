@@ -240,7 +240,7 @@ ipcMain.on("key:search", async function (e, item: string) {
         for (let i = 0; i < res.length; i++) {
             //translate was here
             if (i % 2 === 0 && i !== 0) pass.push(res[i][1]);
-            log.debug(res[i][1]);
+            //log.debug(res[i][1]);
         }
 
         clearStatus();

@@ -8,6 +8,7 @@ import { log } from "./logger";
 export class Database {
     private client: any;
 
+
     constructor() {
         let port: number = config.get("server.port");
         let host: string = config.get("server.host");
@@ -35,6 +36,11 @@ export class Database {
 
     async search(query: string): Promise<string[]> {
         return new Promise<string[]>((resolve) => {
+
+            // token escaping --> https://oss.redislabs.com/redisearch/Escaping.html
+
+            query = query.replace(/:/g, "\\:"); // escape ':'
+            log.debug(this.client.ft_explain)
             this.client.ft_search(["index", query], (err: Error, result: any) => {
                 if (err)
                     log.error(err);
