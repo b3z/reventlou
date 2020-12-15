@@ -9,13 +9,18 @@ export class Database {
     private client: any;
 
     constructor() {
-        this.client = redis.createClient(6379, "127.0.0.1");
-        this.client.on("connect", function () {
-            log.debug("Connected to database.");
+        let port: number = config.get("server.port");
+        let host: string = config.get("server.host");
+        this.client = redis.createClient(port, host); 
+        this.client.on("connect", function () { 
+            log.debug("Connected to redis server: "+host+":"+port);
         });
         redisearch(redis);
-        this.client.ft_create("index STOPWORDS 0 SCHEMA data TEXT".split(" "), (err: any) => {
-            log.error(err);
+        this.client.ft_create("index STOPWORDS 0 SCHEMA data TEXT".split(" "), (err: Error) => {
+            if (err.message == "Index already exists") // check for schema already existent
+                log.debug(err.message)
+            else
+                log.error(err);
         });
     }
 
