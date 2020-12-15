@@ -27,18 +27,6 @@ function createWindow() {
         width: 800,
     });
 
-    //setup tray
-    /* 
-  tray = new Tray(path.join(__dirname, "../assets/eg.png"))
-  const contextMenu = Menu.buildFromTemplate([
-    { label: 'Item1', type: 'radio' },
-    { label: 'Item2', type: 'radio' },
-    { label: 'Item3', type: 'radio', checked: true },
-    { label: 'Item4', type: 'radio' }
-  ])
-  tray.setToolTip('Dies ist meine Anwendung.')
-  tray.setContextMenu(contextMenu)
-*/
 
     // and load the index.html of the app.
     mainWindow.loadFile(path.join(__dirname, "../index.html"));
