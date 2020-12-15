@@ -15,6 +15,7 @@ const configs = [
  * Validate if config file is not broken.
  */
 export function isValid(): boolean {
+    // eslint-disable-next-line prefer-const
     for (let i in configs) {
         if (!config.has(configs[i])) {
             log.error("Config file broken at " + configs[i]);

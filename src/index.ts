@@ -1,35 +1,34 @@
-import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
 import * as path from "path";
+import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
+// import * as config from "config";
 import { Database } from "./database";
 // import { translate } from "./htmlRenderer";
 import { isValid } from "./validateConfig";
-import { copy2archive } from "./fileHandler";
-import * as config from "config";
+// import { copy2archive } from "./fileHandler";
 import { log } from "./logger";
-//import { Controller } from "./controller"; // this is how we wanna import dude.
+// import { Controller } from "./controller"; // this is how we wanna import dude.
 
 let mainWindow: Electron.BrowserWindow;
-let tray = null;
 let db: Database;
 
-function createWindow() {
-    //const redisServer = startServer(); // spin up redis Server.
+
+function createWindow(): void {
+    // const redisServer = startServer(); // spin up redis Server.
     db = new Database(); // connect with ne db cli.
 
-    // Create the browser window.
+    // Create the browser window.      
     mainWindow = new BrowserWindow({
         height: 600,
         title: "Information Management System",
         webPreferences: {
-            nodeIntegration: true, // with this set we have nodeIntegration in index.html. No need to use require.js anymore.
+            nodeIntegration: true // with this set we have nodeIntegration in index.html. No need to use require.js anymore.
         },
-        width: 800,
+        width: 800
     });
 
-
     // and load the index.html of the app.
-    mainWindow.loadFile(path.join(__dirname, "../index.html"));
-    //let c = new Controller(); //?!?! is this how it should be done?
+    void mainWindow.loadFile(path.join(__dirname, "../index.html"));
+    // let c = new Controller(); //?!?! is this how it should be done?
 
     // Emitted when the window is closed.
     mainWindow.on("closed", () => {
@@ -39,22 +38,22 @@ function createWindow() {
         mainWindow = null;
     });
 
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate); //build the actual menu
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate); // build the actual menu
     Menu.setApplicationMenu(mainMenu); // insert menu
 
     // make links open in os browser by default.
-    const handleRedirect = (e: any, url: string) => {
+    const handleRedirect = (e, url: string) => {
         if (url != mainWindow.webContents.getURL()) {
-            let link = (config.get("file.archive") + "/" + url).replace("file://", "");
+            // const link: string = (`${config.get("file.archive")}/${ url}`).replace("file://", "");
             try {
                 e.preventDefault();
                 if (url.indexOf("http") !== -1) {
-                    shell.openExternal(url);
+                    void shell.openExternal(url);
                 } else {
                     // shell.openItem(link);
                 }
             } catch (e) {
-                console.log(e);
+                log.error(e)
             }
         }
     };
@@ -85,7 +84,7 @@ app.on("activate", () => {
     }
 });
 
-//Menu template
+// Menu template
 const mainMenuTemplate: any[] = [
     // array need to be any so we can add empty object later.
     {
@@ -100,8 +99,8 @@ const mainMenuTemplate: any[] = [
             { role: "unhide" },
             { type: "separator" },
             { role: "close" },
-            { role: "quit" },
-        ],
+            { role: "quit" }
+        ]
     },
     {
         label: "Edit",
@@ -111,14 +110,14 @@ const mainMenuTemplate: any[] = [
                 accelerator: "CmdOrCtrl + S",
                 click() {
                     handleSave();
-                },
+                }
             },
             {
                 label: "Clear",
                 accelerator: "CmdOrCtrl + D",
                 click() {
                     handleClear();
-                },
+                }
             },
             { type: "separator" },
             { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
@@ -127,12 +126,12 @@ const mainMenuTemplate: any[] = [
             { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
             { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
             { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
-            { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" },
-        ],
-    },
+            { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+        ]
+    }
 ];
 
-//add developer tools if not in production
+// add developer tools if not in production
 if (process.env.NODE_ENV !== "production") {
     mainMenuTemplate.push({
         label: "Dev Tools",
@@ -142,41 +141,41 @@ if (process.env.NODE_ENV !== "production") {
                 accelerator: process.platform == "darwin" ? "Command+I" : "Ctrl+I",
                 click() {
                     mainWindow.webContents.openDevTools();
-                },
+                }
             },
             { role: "reload" },
             {
                 label: "Validate config",
                 click() {
                     isValid();
-                },
+                }
             },
             { role: "seperator" },
             {
                 label: "Test Status Item",
                 click() {
                     addStatus(undefined, "But here goes text");
-                },
+                }
             },
             {
                 label: "Icon Status Item",
                 click() {
                     addStatus("assets/icons/png/icon.png", undefined);
-                },
+                }
             },
             {
                 label: "Clear all Status",
                 click() {
                     clearStatus();
-                },
+                }
             },
             {
                 label: "Suggest",
                 click() {
                     suggest();
-                },
-            },
-        ],
+                }
+            }
+        ]
     });
 }
 
@@ -193,6 +192,7 @@ function suggest() {
 
 /**
  * Add item to statusBar
+ *
  * @param iconPath represents the relative path to the icon.
  * @param message which shall eb shown left side of the icon. Put undefined if no message shall be shown.
  */
@@ -212,7 +212,7 @@ function handleSave() {
     mainWindow.webContents.send("editor:get:SaveValue");
 }
 
-ipcMain.on("editor:save:value", function (e, value) {
+ipcMain.on("editor:save:value", function(e, value) {
     clearStatus();
     let status: string;
     if (db.save(value)) {
@@ -223,13 +223,13 @@ ipcMain.on("editor:save:value", function (e, value) {
     addStatus(undefined, status);
 });
 
-ipcMain.on("editor:suggest:value", function (e, value) {
-    //db.suggest(value);
+ipcMain.on("editor:suggest:value", function(e, value) {
+    // db.suggest(value);
     log.debug("Needs implementation.") // TODO --> see db, github #1
 });
 
 // catch item:search from editor with the editors value.
-ipcMain.on("key:search", async function (e, item: string) {
+ipcMain.on("key:search", async function(e, item: string) {
     let res: string[] = [];
     const pass: String[] = [];
     if (!item) {
@@ -238,13 +238,15 @@ ipcMain.on("key:search", async function (e, item: string) {
     } else {
         res = await db.search(item);
         for (let i = 0; i < res.length; i++) {
-            //translate was here
-            if (i % 2 === 0 && i !== 0) pass.push(res[i][1]);
-            //log.debug(res[i][1]);
+            // translate was here
+            if (i % 2 === 0 && i !== 0) {
+pass.push(res[i][1]);
+}
+            // log.debug(res[i][1]);
         }
 
         clearStatus();
-        addStatus(undefined, "Results: " + res[0]);
+        addStatus(undefined, `Results: ${  res[0]}`);
     }
     e.sender.send("list:update", pass);
 });
@@ -254,7 +256,8 @@ function handleClear() {
 }
 
 ipcMain.on("editor:files:save", async (e: any, files: string[]) => {
-    for (let i in files) {
-        copy2archive(files[i]);
-    }
+    // for (const i in files) {
+    //     copy2archive(files[i]);
+    // TODO IMPLEMENT
+    // }
 });

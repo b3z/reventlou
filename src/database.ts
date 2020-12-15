@@ -1,4 +1,3 @@
-import { stringify } from "querystring";
 import { md5 } from "./hash";
 import * as redis from "redis";
 import * as redisearch from "redis-redisearch";
@@ -9,9 +8,9 @@ export class Database {
     private client: any;
 
 
-    constructor() {
-        let port: number = config.get("server.port");
-        let host: string = config.get("server.host");
+    public constructor() {
+        const port: number = config.get("server.port");
+        const host: string = config.get("server.host");
         this.client = redis.createClient(port, host); 
         this.client.on("connect", function () { 
             log.debug("Connected to redis server: "+host+":"+port);
@@ -19,13 +18,13 @@ export class Database {
         redisearch(redis);
         this.client.ft_create("index STOPWORDS 0 SCHEMA data TEXT".split(" "), (err: Error) => {
             if (err.message == "Index already exists") // check for schema already existent
-                log.debug(err.message)
+                {log.debug(err.message)}
             else
-                log.error(err);
+                {log.error(err);}
         });
     }
 
-    save(data: string): any {
+    public save(data: string): any {
         // adding to index: docID = hash, score = 1.0 with FILEDS data = the date we pass.
         this.client.ft_add(["index", md5(data), "1.0", "FIELDS", "data", data], (err: Error) => {
             log.error(err);
@@ -34,7 +33,7 @@ export class Database {
         log.debug(md5(data));
     }
 
-    async search(query: string): Promise<string[]> {
+    public async search(query: string): Promise<string[]> {
         return new Promise<string[]>((resolve) => {
 
             // token escaping --> https://oss.redislabs.com/redisearch/Escaping.html
@@ -43,7 +42,7 @@ export class Database {
             log.debug(this.client.ft_explain)
             this.client.ft_search(["index", query], (err: Error, result: any) => {
                 if (err)
-                    log.error(err);
+                    {log.error(err);}
                 
                 resolve(result);
             });
@@ -58,7 +57,7 @@ export class Database {
     // }
 
     public exists(key: string) {
-        if (key == null || key.length == 0) throw new Error("Illegal Argument.");
+        if (key == null || key.length == 0) {throw new Error("Illegal Argument.");}
 
         this.client.exists(key, function (err: string, reply: any) {
             if (reply === 1) {
