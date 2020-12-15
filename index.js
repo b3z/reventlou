@@ -1,7 +1,5 @@
 const electron = require('electron');
-const {
-    ipcRenderer
-} = electron;
+const {ipcRenderer} = electron;
 
 
 
@@ -67,8 +65,8 @@ ipcRenderer.on('list:update', (e, res) => {
         listBGActive = true
     }
 
-    for (let i in res) {
-        let li = document.createElement('li');
+    for (const i in res) {
+        const li = document.createElement('li');
         li.innerHTML = res[i];
         list.appendChild(li);
     }
@@ -79,13 +77,13 @@ ipcRenderer.on('editor:clear', (e) => {
 });
 
 function toggle(e, c) {
-    let classes = e.className.split(" ");
-    let i = classes.indexOf(c);
+    const classes = e.className.split(" ");
+    const i = classes.indexOf(c);
 
     if (i >= 0)
-        classes.splice(i, 1);
+        {classes.splice(i, 1);}
     else
-        classes.push(c);
+        {classes.push(c);}
     e.className = classes.join(" ");
 }
 
@@ -98,8 +96,8 @@ editor.addEventListener('drop', handleFileDrop, false);
 function handleFileDrop(evt) {
     evt.stopPropagation();
     evt.preventDefault();
-    let files = evt.dataTransfer.files; // FileList object.
-    let fileArr = []
+    const files = evt.dataTransfer.files; // FileList object.
+    const fileArr = []
     for (let i = 0; i < files.length; i++) {
         fileArr.push(files.item(i).path)
         editor.value = editor.value + "\nfile://" + files.item(i).name.replace(/ /g, "_")
