@@ -2,7 +2,7 @@ import * as path from "path";
 import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
 // import * as config from "config";
 import { Database } from "./database";
-// import { translate } from "./htmlRenderer";
+import { translate } from "./htmlRenderer";
 import { isValid } from "./validateConfig";
 // import { copy2archive } from "./fileHandler";
 import { log } from "./logger";
@@ -11,19 +11,18 @@ import { log } from "./logger";
 let mainWindow: Electron.BrowserWindow;
 let db: Database;
 
-
 function createWindow(): void {
     // const redisServer = startServer(); // spin up redis Server.
     db = new Database(); // connect with ne db cli.
 
-    // Create the browser window.      
+    // Create the browser window.
     mainWindow = new BrowserWindow({
         height: 600,
         title: "Information Management System",
         webPreferences: {
-            nodeIntegration: true // with this set we have nodeIntegration in index.html. No need to use require.js anymore.
+            nodeIntegration: true, // with this set we have nodeIntegration in index.html. No need to use require.js anymore.
         },
-        width: 800
+        width: 800,
     });
 
     // and load the index.html of the app.
@@ -53,7 +52,7 @@ function createWindow(): void {
                     // shell.openItem(link);
                 }
             } catch (e) {
-                log.error(e)
+                log.error(e);
             }
         }
     };
@@ -99,8 +98,8 @@ const mainMenuTemplate: any[] = [
             { role: "unhide" },
             { type: "separator" },
             { role: "close" },
-            { role: "quit" }
-        ]
+            { role: "quit" },
+        ],
     },
     {
         label: "Edit",
@@ -110,25 +109,33 @@ const mainMenuTemplate: any[] = [
                 accelerator: "CmdOrCtrl + S",
                 click() {
                     handleSave();
-                }
+                },
             },
             {
                 label: "Clear",
                 accelerator: "CmdOrCtrl + D",
                 click() {
                     handleClear();
-                }
+                },
             },
             { type: "separator" },
             { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
-            { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+            {
+                label: "Redo",
+                accelerator: "Shift+CmdOrCtrl+Z",
+                selector: "redo:",
+            },
             { type: "separator" },
             { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
             { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
             { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
-            { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
-        ]
-    }
+            {
+                label: "Select All",
+                accelerator: "CmdOrCtrl+A",
+                selector: "selectAll:",
+            },
+        ],
+    },
 ];
 
 // add developer tools if not in production
@@ -138,44 +145,45 @@ if (process.env.NODE_ENV !== "production") {
         submenu: [
             {
                 label: "Toggle dev tools",
-                accelerator: process.platform == "darwin" ? "Command+I" : "Ctrl+I",
+                accelerator:
+                    process.platform == "darwin" ? "Command+I" : "Ctrl+I",
                 click() {
                     mainWindow.webContents.openDevTools();
-                }
+                },
             },
             { role: "reload" },
             {
                 label: "Validate config",
                 click() {
                     isValid();
-                }
+                },
             },
             { role: "seperator" },
             {
                 label: "Test Status Item",
                 click() {
                     addStatus(undefined, "But here goes text");
-                }
+                },
             },
             {
                 label: "Icon Status Item",
                 click() {
                     addStatus("assets/icons/png/icon.png", undefined);
-                }
+                },
             },
             {
                 label: "Clear all Status",
                 click() {
                     clearStatus();
-                }
+                },
             },
             {
                 label: "Suggest",
                 click() {
                     suggest();
-                }
-            }
-        ]
+                },
+            },
+        ],
     });
 }
 
@@ -212,7 +220,7 @@ function handleSave() {
     mainWindow.webContents.send("editor:get:SaveValue");
 }
 
-ipcMain.on("editor:save:value", function(e, value) {
+ipcMain.on("editor:save:value", function (e, value) {
     clearStatus();
     let status: string;
     if (db.save(value)) {
@@ -223,30 +231,30 @@ ipcMain.on("editor:save:value", function(e, value) {
     addStatus(undefined, status);
 });
 
-ipcMain.on("editor:suggest:value", function(e, value) {
+ipcMain.on("editor:suggest:value", function (e, value) {
     // db.suggest(value);
-    log.debug("Needs implementation.") // TODO --> see db, github #1
+    log.debug("Needs implementation."); // TODO --> see db, github #1
 });
 
 // catch item:search from editor with the editors value.
-ipcMain.on("key:search", async function(e, item: string) {
+ipcMain.on("key:search", async function (e, item: string) {
     let res: string[] = [];
     const pass: String[] = [];
     if (!item) {
-        clearStatus();
+        clearStatus(); // maybe implement update status so we can save one call over ipc TODO
         addStatus(undefined, "Type to search...");
     } else {
         res = await db.search(item);
         for (let i = 0; i < res.length; i++) {
             // translate was here
             if (i % 2 === 0 && i !== 0) {
-pass.push(res[i][1]);
-}
+                pass.push(translate(res[i][1]));
+            }
             // log.debug(res[i][1]);
         }
 
         clearStatus();
-        addStatus(undefined, `Results: ${  res[0]}`);
+        addStatus(undefined, `Results: ${res[0]}`);
     }
     e.sender.send("list:update", pass);
 });
