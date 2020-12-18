@@ -16,7 +16,10 @@ export class Database {
         });
         redisearch(redis);
         this.client.ft_create(
-            "index STOPWORDS 0 SCHEMA data TEXT".split(" "),
+            // not sure if numeric is the right type for timestamp but I didn't find a better one.
+            "index STOPWORDS 0 SCHEMA data TEXT timestamp NUMERIC SORTABLE".split(
+                " "
+            ),
             (err: Error) => {
                 if (err.message == "Index already exists") {
                     // check for schema already existent
@@ -31,7 +34,16 @@ export class Database {
     public save(data: string): any {
         // adding to index: docID = hash, score = 1.0 with FILEDS data = the date we pass.
         this.client.ft_add(
-            ["index", md5(data), "1.0", "FIELDS", "data", data],
+            [
+                "index",
+                md5(data),
+                "1.0",
+                "FIELDS",
+                "data",
+                data,
+                "timestamp",
+                +new Date(), // timestamp in milli seconds
+            ],
             (err: Error) => {
                 log.error(err);
             }
@@ -47,7 +59,17 @@ export class Database {
             query = query.replace(/:/g, "\\:"); // escape ':' // bad fix for #6 - works but is not good
             log.debug(this.client.ft_explain);
             this.client.ft_search(
-                ["index", query],
+                // ft.search index @data:(test) RETURN 1 data SORTBY timestamp
+                [
+                    "index",
+                    "@data:(" + query + ")",
+                    "RETURN",
+                    1,
+                    "data",
+                    "SORTBY",
+                    "timestamp",
+                    "DESC",
+                ],
                 (err: Error, result: any) => {
                     if (err) {
                         log.error(err);
