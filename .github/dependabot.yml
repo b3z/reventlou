@@ -8,7 +8,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "live"
+      interval: "daily"
     reviewers:
       - "b3z"
     labels:
