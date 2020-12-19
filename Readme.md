@@ -35,3 +35,14 @@ result:   "Apple.com is the website of a huge company."
 If certain notes should be grouped it is whise to use hashtags (e.g #WeLoveTurtles or #work) fot tieing them together.
 
 For now that it's here since we are in development. If you want you can read [here](https://zeppel.eu/b/how-ims-works/) about an older IMS version which was slightly different but had the sam fundamentals.
+
+
+### Versioning 
+
+We are using [SemVer](https://semver.org/#summary).
+
+On the version number MAJOR.MINOR.PATCH those are the meanings:
+
+1. MAJOR - incompatible API changes.
+2. MINOR - added functionality in a backwards compatible manner.
+3. PATCH - made backwards compatible bug fixes.
