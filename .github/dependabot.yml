@@ -7,7 +7,8 @@ version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
-    update_schedule: "daily"
+    schedule:
+      interval: "daily"
     reviewers:
       - "b3z"
     labels:
@@ -16,7 +17,8 @@ updates:
 
   - package-ecosystem: "github-actions"
     directory: "/"
-    update_schedule: "daily"
+    schedule:
+      interval: "daily"
     reviewers:
       - "b3z"
     labels:
