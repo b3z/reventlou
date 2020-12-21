@@ -29,7 +29,7 @@ function linkHTTP(md: string): string {
 }
 
 function newline(md: string): string {
-    return md.replace("/\\n/g", "<br>");
+    return md.replace(/\n/g, "<br>");
 }
 
 // function linkFILE(md: string): string {
