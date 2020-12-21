@@ -55,9 +55,7 @@ export class Database {
     public async search(query: string): Promise<string[]> {
         return new Promise<string[]>((resolve) => {
             // token escaping --> https://oss.redislabs.com/redisearch/Escaping.html
-
             query = query.replace(/:/g, "\\:"); // escape ':' // bad fix for #6 - works but is not good
-            log.debug(this.client.ft_explain);
             this.client.ft_search(
                 // ft.search index @data:(test) RETURN 1 data SORTBY timestamp
                 [

@@ -1,6 +1,7 @@
 // // import * as highlight from "highlight.js";
 // // import { Converter } from "showdown";
-// // import { networkInterfaces } from "os";
+// // import { networkInterfaces } from "os";#
+// import { log } from "./logger";
 
 export function translate(md: string): string {
     // this is nice but we need to rewrite a lot for md and code syntax highlighting
@@ -9,7 +10,8 @@ export function translate(md: string): string {
     //return converter.makeHtml(md);
 
     // md = newline(md);
-    md = linkHTTP(md);
+    md = linkHTTP(md); // make links clickable
+    md = newline(md); // render linebreaks as html
     // md = linkFILE(md);
     //md = linkHASH(md);
     return md;
@@ -24,6 +26,10 @@ function linkHTTP(md: string): string {
     return md.replace(urlRegex, (url) => {
         return '<a href="' + url + '">' + url + "</a>";
     });
+}
+
+function newline(md: string): string {
+    return md.replace("/\\n/g", "<br>");
 }
 
 // function linkFILE(md: string): string {
