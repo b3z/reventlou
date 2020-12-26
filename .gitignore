@@ -7,3 +7,4 @@ release-builds
 node_modules
 archive
 *.swp
+db/*.rdb
