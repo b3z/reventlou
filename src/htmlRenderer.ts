@@ -12,7 +12,7 @@ export function translate(md: string): string {
     // md = newline(md);
     md = linkHTTP(md); // make links clickable
     md = newline(md); // render linebreaks as html
-    // md = linkFILE(md);
+    md = linkFILE(md);
     //md = linkHASH(md);
     return md;
 }
@@ -32,12 +32,12 @@ function newline(md: string): string {
     return md.replace(/\n/g, "<br>");
 }
 
-// function linkFILE(md: string): string {
-//     var urlRegex = /(file:\/\/[^\s]+)/g;
-//     return md.replace(urlRegex, (url) => {
-//         return '<a href="' + url + '">' + url + "</a>";
-//     });
-// }
+function linkFILE(md: string): string {
+    const urlRegex = /(file:\/\/[^\s]+)/g;
+    return md.replace(urlRegex, (url) => {
+        return '<a href="' + url + '">' + url + "</a>";
+    });
+}
 
 // function linkHASH(md: string): string {
 //     var urlRegex = /(ims:\/\/[^\s]+)/g;

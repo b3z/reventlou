@@ -1,6 +1,6 @@
 import * as path from "path";
 import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
-// import * as config from "config";
+import * as config from "config";
 import { Database } from "./database";
 import { translate } from "./htmlRenderer";
 import { isValid } from "./validateConfig";
@@ -40,16 +40,19 @@ function createWindow(): void {
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate); // build the actual menu
     Menu.setApplicationMenu(mainMenu); // insert menu
 
-    // make links open in os browser by default.
+    // make links open in os browser by default. Open Files in desktops default manager.
     const handleRedirect = (e, url: string) => {
         if (url != mainWindow.webContents.getURL()) {
-            // const link: string = (`${config.get("file.archive")}/${ url}`).replace("file://", "");
+            const link: string = `${config.get("file.archive")}/${url}`.replace(
+                "file://",
+                ""
+            );
             try {
                 e.preventDefault();
                 if (url.indexOf("http") !== -1) {
                     void shell.openExternal(url);
                 } else {
-                    // shell.openItem(link);
+                    shell.openPath(link);
                 }
             } catch (e) {
                 log.error(e);
