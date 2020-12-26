@@ -4,7 +4,7 @@ import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
 import { Database } from "./database";
 import { translate } from "./htmlRenderer";
 import { isValid } from "./validateConfig";
-// import { copy2archive } from "./fileHandler";
+import { copyToArchive } from "./fileHandler";
 import { log } from "./logger";
 // import { Controller } from "./controller"; // this is how we wanna import dude.
 
@@ -264,8 +264,7 @@ function handleClear() {
 }
 
 ipcMain.on("editor:files:save", async (e: any, files: string[]) => {
-    // for (const i in files) {
-    //     copy2archive(files[i]);
-    // TODO IMPLEMENT
-    // }
+    for (const i in files) {
+        copyToArchive(files[i]);
+    }
 });

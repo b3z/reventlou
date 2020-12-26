@@ -93,6 +93,14 @@ function toggle(e, c) {
 editor.addEventListener('dragover', handleDragOver, false);
 editor.addEventListener('drop', handleFileDrop, false);
 
+// document.addEventListener("dragenter", (event) => {
+//     console.log("File is in the Drop Space");
+// });
+
+// document.addEventListener("dragleave", (event) => {
+//     console.log("File has left the Drop Space");
+// });
+
 function handleFileDrop(evt) {
     evt.stopPropagation();
     evt.preventDefault();
@@ -111,3 +119,4 @@ function handleDragOver(evt) {
     evt.preventDefault();
     evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
 }
+
