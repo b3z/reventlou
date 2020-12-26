@@ -170,3 +170,19 @@ li a:hover {
 
   }
 }
+
+#explorer {
+  font-weight: bold;
+}
+
+#file {
+  border-radius: 3px;
+  background-color: #025ba4;
+  padding-left: 3px;
+  padding-right: 3px;
+
+}
+
+#file a {
+  text-decoration: none;
+}

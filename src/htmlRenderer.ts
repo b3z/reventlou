@@ -35,7 +35,16 @@ function newline(md: string): string {
 function linkFILE(md: string): string {
     const urlRegex = /(file:\/\/[^\s]+)/g;
     return md.replace(urlRegex, (url) => {
-        return '<a href="' + url + '">' + url + "</a>";
+        return (
+            '<div id="file"><a id="explorer" href="explorer:' +
+            url +
+            '">&#8678; </a>' +
+            '<a href="' +
+            url +
+            '">' +
+            url.replace("file://", "") +
+            "</a></div>"
+        );
     });
 }
 

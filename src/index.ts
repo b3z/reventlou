@@ -43,16 +43,26 @@ function createWindow(): void {
     // make links open in os browser by default. Open Files in desktops default manager.
     const handleRedirect = (e, url: string) => {
         if (url != mainWindow.webContents.getURL()) {
-            const link: string = `${config.get("file.archive")}/${url}`.replace(
-                "file://",
-                ""
-            );
             try {
                 e.preventDefault();
-                if (url.indexOf("http") !== -1) {
+                if (url.indexOf("http") != -1) {
                     void shell.openExternal(url);
                 } else {
-                    shell.openPath(link);
+                    if (url.indexOf("explorer:file") != -1) {
+                        shell.showItemInFolder(
+                            `${config.get("file.archive")}/${url}`.replace(
+                                "explorer:file://",
+                                ""
+                            )
+                        );
+                    } else {
+                        shell.openPath(
+                            `${config.get("file.archive")}/${url}`.replace(
+                                "file://",
+                                ""
+                            )
+                        );
+                    }
                 }
             } catch (e) {
                 log.error(e);
