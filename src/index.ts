@@ -6,13 +6,17 @@ import { translate } from "./htmlRenderer";
 import { isValid } from "./validateConfig";
 import { copyToArchive } from "./fileHandler";
 import { log } from "./logger";
+import { runRedis } from "./redisServer";
+
 // import { Controller } from "./controller"; // this is how we wanna import dude.
 
 let mainWindow: Electron.BrowserWindow;
 let db: Database;
 
 function createWindow(): void {
-    // const redisServer = startServer(); // spin up redis Server.
+    // run redis server
+    runRedis();
+
     db = new Database(); // connect with ne db cli.
 
     // Create the browser window.
@@ -233,7 +237,7 @@ function handleSave() {
     mainWindow.webContents.send("editor:get:SaveValue");
 }
 
-ipcMain.on("editor:save:value", function (e, value) {
+ipcMain.on("editor:save:value", function (_e, value) {
     clearStatus();
     let status: string;
     if (db.save(value)) {
@@ -244,7 +248,7 @@ ipcMain.on("editor:save:value", function (e, value) {
     addStatus(undefined, status);
 });
 
-ipcMain.on("editor:suggest:value", function (e, value) {
+ipcMain.on("editor:suggest:value", function (_e, _value) {
     // db.suggest(value);
     log.debug("Needs implementation."); // TODO --> see db, github #1
 });
@@ -276,7 +280,7 @@ function handleClear() {
     mainWindow.webContents.send("editor:clear");
 }
 
-ipcMain.on("editor:files:save", async (e: any, files: string[]) => {
+ipcMain.on("editor:files:save", async (_e: any, files: string[]) => {
     for (const i in files) {
         copyToArchive(files[i]);
     }
