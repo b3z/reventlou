@@ -17,4 +17,4 @@ log.appenders.set("everything", {
     type: "file",
     filename: get("log.path"),
 });
-log.info(`Logging path: ${  get("log.path")}`);
+log.info(`Logging path: ${get("log.path")}`);

@@ -53,6 +53,9 @@ export class Database {
             }
         );
 
+        // "commit"
+        this.client.save(); // save RDB
+
         log.debug(md5(data));
     }
 
@@ -105,23 +108,3 @@ export class Database {
         });
     }
 }
-
-/* Save as obj
-
-client.hmset('frameworks', {
-    'javascript': 'AngularJS',
-    'css': 'Bootstrap',
-    'node': 'Express'
-});
-
-*/
-
-/*
-
-if value is of type string -> GET <key>
-if value is of type hash -> HGETALL <key>
-if value is of type lists -> lrange <key> <start> <end>
-if value is of type sets -> smembers <key>
-if value is of type sorted sets -> ZRANGEBYSCORE <key> <min> <max>
-
-*/
