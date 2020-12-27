@@ -16,7 +16,7 @@ First of all I hate directory structures for saving old files, small project sni
 
 So now the the idea is to just throw these things into this database and find them again via search. So you kinda "google" your archive and easily find stuff again. And that's it. It is that simple.
 
-For **example** you need your rental contract again after a coupl years, no problem because you saved it in the database and now just have to search for `rental`. Easy. Or you need a coupl mathematical formulas now and then. Just searching for `circle diameter` and boom it pops up because you saced it previously.
+For **example** you need your rental contract again after a couple years, no problem because you saved it in the database and now just have to search for `rental`. Easy. Or you need a couple mathematical formulas now and then. Just searching for `circle diameter` and boom it pops up because you saced it previously.
 
 ### Features
 
@@ -33,7 +33,9 @@ Ideas to come:
 * suggestion on typing
 * (multiple)remote database support
 * shared databases
+  * presets (like e.g. formulas, snippets)
 * API (maybe want to hook it to something?!)
+
 
 **Example how it works**
 
