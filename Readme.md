@@ -12,7 +12,7 @@ Things are just stored and indexed and found again by a search.
 
 ### More About
 
-First of all I hate directory structures for saving old files, small project snippets, nice website I found while surfing the web. It works fine for a while but after a while its all cluttered up and messy. 
+First of all I hate directory structures for saving old files, small project snippets, nice website I found while surfing the web. It works fine for a while but after a while it's all cluttered up and messy. 
 
 So now the the idea is to just throw these things into this database and find them again via search. So you kinda "google" your archive and easily find stuff again. And that's it. It is that simple.
 
