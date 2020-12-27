@@ -1,19 +1,31 @@
+import * as os from "os";
+
+process.env["NODE_CONFIG_DIR"] = os.homedir() + "/.reventlou";
+
 import * as path from "path";
 import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
-import * as config from "config";
 import { Database } from "./database";
 import { translate } from "./htmlRenderer";
 import { isValid } from "./validateConfig";
 import { copyToArchive } from "./fileHandler";
 import { log } from "./logger";
 import { runRedis } from "./redisServer";
+import { configExists } from "./configHandler";
+// import * as config from "config";
 
 // import { Controller } from "./controller"; // this is how we wanna import dude.
 
 let mainWindow: Electron.BrowserWindow;
 let db: Database;
+let config;
 
-function createWindow(): void {
+async function createWindow(): Promise<void> {
+    // checkt if .reventlou with configs exists. And create config if needed.
+    configExists();
+
+    // if all the config check passend an files were created if needed load config module.
+    config = await import("config");
+
     // run redis server
     runRedis();
 
@@ -54,17 +66,21 @@ function createWindow(): void {
                 } else {
                     if (url.indexOf("explorer:file") != -1) {
                         shell.showItemInFolder(
-                            `${config.get("file.archive")}/${url}`.replace(
-                                "explorer:file://",
-                                ""
-                            )
+                            os.homedir() +
+                                "/.reventlou/" +
+                                `${config.get("file.archive")}/${url}`.replace(
+                                    "explorer:file://",
+                                    ""
+                                )
                         );
                     } else {
                         shell.openPath(
-                            `${config.get("file.archive")}/${url}`.replace(
-                                "file://",
-                                ""
-                            )
+                            os.homedir() +
+                                "/.reventlou/" +
+                                `${config.get("file.archive")}/${url}`.replace(
+                                    "file://",
+                                    ""
+                                )
                         );
                     }
                 }

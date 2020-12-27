@@ -3,10 +3,10 @@
     server: {
         host: "127.0.0.1",
         port: 6379,
-        executableLocation: "server/server.sh"
+        executableLocation: "server/server.sh", // this server runnable is called on start. 
     },
     file: {
-        archive: "archive", // Path where files are supposed to be saved.
+        archive: "archive", // path where files are supposed to be saved. This is a sub dir of .reventlou
     },
     log: {
         path: "logs/ims.log", // Path where logfile is saved.

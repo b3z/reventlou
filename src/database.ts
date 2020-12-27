@@ -24,7 +24,7 @@ export class Database {
                 if (err.message == "Index already exists") {
                     // check for schema already existent
                     log.debug(err.message);
-                } else {
+                } else if (err) {
                     log.error(err);
                 }
             }
@@ -49,7 +49,9 @@ export class Database {
                 +new Date(), // timestamp in milli seconds
             ],
             (err: Error) => {
-                log.error(err);
+                if (err) {
+                    log.error(err);
+                }
             }
         );
 

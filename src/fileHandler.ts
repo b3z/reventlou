@@ -1,6 +1,8 @@
 import { constants, access } from "fs";
 import { get } from "config";
 import { log } from "./logger";
+import * as os from "os";
+
 const fs = require("fs-extra");
 
 /**
@@ -24,6 +26,8 @@ export async function exist(filePath: string): Promise<boolean> {
 export function copyToArchive(filePath: string) {
     const filePathArr = filePath.split("/");
     const destination = (
+        os.homedir() +
+        "/.reventlou/" +
         get("file.archive") +
         "/" +
         filePathArr[filePathArr.length - 1]
