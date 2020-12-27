@@ -21,11 +21,13 @@ export class Database {
                 " "
             ),
             (err: Error) => {
-                if (err.message == "Index already exists") {
-                    // check for schema already existent
-                    log.debug(err.message);
-                } else if (err) {
-                    log.error(err);
+                if (err) {
+                    if (err.message == "Index already exists") {
+                        // check for schema already existent
+                        log.debug(err.message);
+                    } else {
+                        log.error(err);
+                    }
                 }
             }
         );
