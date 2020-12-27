@@ -2,17 +2,40 @@
 
 > This tool is so simple that most people don't understand how to use it.
 
-#### Summary
+#### TL;DR
 
-IMS is a database which stores all type of things. It is like a notes app on steroids and without any structure. Docs, Text, ... are saved as a "note" and are indexed so they can be found by using a search.
+This is a personal database which stores all type of things. Text, Files, Links. Stored things can be searched. 
+
+Things are just stored and indexed and found again by a search.
 
 <div style="text-align:center"><img src="assets/screenshot.png" /></div>
 
 ### More About
 
-So as the summary explains it is a database which doesn't have any structure. Things are just stored and indexed and found again by a search.
+First of all I hate directory structures for saving old files, small project snippets, nice website I found while surfing the web. It works fine for a while but after a while its all cluttered up and messy. 
 
-**Example**
+So now the the idea is to just throw these things into this database and find them again via search. So you kinda "google" your archive and easily find stuff again. And that's it. It is that simple.
+
+For **example** you need your rental contract again after a coupl years, no problem because you saved it in the database and now just have to search for `rental`. Easy. Or you need a coupl mathematical formulas now and then. Just searching for `circle diameter` and boom it pops up because you saced it previously.
+
+### Features
+
+* save files
+* save text
+* url detection
+* search them all
+
+Ideas to come:
+
+* editing and deleting (obviously important)
+* tagging - need to differenciate
+* fuzzy searching
+* suggestion on typing
+* (multiple)remote database support
+* shared databases
+* API (maybe want to hook it to something?!)
+
+**Example how it works**
 
 We save the notes
 
@@ -35,6 +58,7 @@ result:   "Apple.com is the website of a huge company."
 If certain notes should be grouped it is whise to use hashtags (e.g #WeLoveTurtles or #work) fot tieing them together.
 
 For now that it's here since we are in development. If you want you can read [here](https://zeppel.eu/b/how-ims-works/) about an older IMS version which was slightly different but had the sam fundamentals.
+
 
 
 ### Versioning 
