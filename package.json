@@ -13,8 +13,8 @@
         "rebuild node part": "npm run clean && npm install && npm run build",
         "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
         "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Information Management System\"",
-        "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
-        "create-installer-mac": "electron-installer-dmg ./release-builds/Electron\\ tutorial\\ app-darwin-x64/Electron\\ tutorial\\ app.app electron-tutorial-app --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns"
+        "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds",
+        "create-installer-mac": "electron-installer-dmg ./release-builds/reventlou-darwin-x64/reventlou.app reventlou --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns"
     },
     "author": "b3z",
     "license": "MIT",
@@ -25,6 +25,7 @@
         "@types/showdown": "^1.9.3",
         "config": "^3.3.1",
         "electron": "^11.1.0",
+        "electron-installer-dmg": "^3.0.0",
         "highlight.js": "^10.2.0",
         "redis": "^3.0.2",
         "redis-redisearch": "^1.0.1",
@@ -32,9 +33,9 @@
         "typescript": "^4.1.3"
     },
     "devDependencies": {
-        "electron-packager": "^15.2.0",
         "@typescript-eslint/eslint-plugin": "^4.10.0",
         "@typescript-eslint/parser": "^4.10.0",
+        "electron-packager": "^15.2.0",
         "eslint": "^7.15.0",
         "eslint-config-prettier": "^7.1.0",
         "eslint-plugin-babel": "^5.3.1",
