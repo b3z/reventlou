@@ -1,4 +1,6 @@
 {
+    // all paths are sub of $HOME/.reventlou
+
     // redis server
     server: {
         host: "127.0.0.1",
@@ -6,10 +8,10 @@
         executableLocation: "server/server.sh", // this server runnable is called on start. 
     },
     file: {
-        archive: "archive", // path where files are supposed to be saved. This is a sub dir of .reventlou
+        archive: "archive", // path where files are supposed to be saved.
     },
     log: {
-        path: "logs/ims.log", // Path where logfile is saved.
+        file: "ims.log", // File where logs are saved in.
         silent: false, // Don't show logs in terminal.
     },
 }

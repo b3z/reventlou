@@ -1,5 +1,6 @@
 import { Logger } from "@tsed/logger";
 import { get } from "config";
+import * as os from "os";
 
 export const log = new Logger("log");
 
@@ -15,6 +16,6 @@ if (!get("log.silent")) {
 
 log.appenders.set("everything", {
     type: "file",
-    filename: get("log.path"),
+    filename: os.homedir() + "/.reventlou/logs/" + get("log.file"),
 });
-log.info(`Logging path: ${get("log.path")}`);
+log.info(`Logging path: ${os.homedir()}/.reventlou/logs/${get("log.file")}`);
