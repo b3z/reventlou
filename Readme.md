@@ -36,6 +36,9 @@ Ideas to come:
   * presets (like e.g. formulas, snippets)
 * API (maybe want to hook it to something?!)
 
+### Install
+
+Mac: `brew install --cask b3z/small/reventlou`
 
 **Example how it works**
 
