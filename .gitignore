@@ -5,7 +5,4 @@ logs
 .DS_Store
 release-builds
 node_modules
-archive
 *.swp
-db/*.rdb
-config/redis.tmp.conf
