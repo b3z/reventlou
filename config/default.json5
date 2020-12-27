@@ -5,7 +5,6 @@
     server: {
         host: "127.0.0.1",
         port: 6379,
-        executableLocation: "server/server.sh", // this server runnable is called on start. 
     },
     file: {
         archive: "archive", // path where files are supposed to be saved.

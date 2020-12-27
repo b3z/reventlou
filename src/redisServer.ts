@@ -1,9 +1,8 @@
 import { spawn } from "child_process";
-import * as config from "config";
 import { log } from "./logger";
 
 export function runRedis(): void {
-    const redis = spawn("sh", ["" + config.get("server.executableLocation")]);
+    const redis = spawn("sh", [__dirname + "/../server/server.sh"]);
 
     redis.stdout.on("data", (data) => {
         log.info(`[REDIS] ${data}`);

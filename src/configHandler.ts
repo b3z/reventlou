@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, copyFileSync } from "fs";
 
 const DOT_R_PATH = os.homedir() + "/.reventlou";
 const DEFAULT_CONFIG = DOT_R_PATH + "/default.json5";
+const REDIS_DEFAULT_CONFIG = DOT_R_PATH + "/db/redis.conf";
 const ARCHIVE = DOT_R_PATH + "/archive";
 const DB = DOT_R_PATH + "/db";
 const LOGS = DOT_R_PATH + "/logs/";
@@ -16,8 +17,8 @@ export function configExists() {
         mkdirSync(DOT_R_PATH);
     }
     if (!existsSync(DEFAULT_CONFIG)) {
-        console.log("deafult config doesn't exists. Creating it now.");
-        copyFileSync("config/default.json5", DEFAULT_CONFIG);
+        console.log("default config doesn't exists. Creating it now.");
+        copyFileSync(__dirname + "/../config/default.json5", DEFAULT_CONFIG);
     }
     if (!existsSync(ARCHIVE)) {
         console.log("archive doesn't exists. Creating it now.");
@@ -30,5 +31,9 @@ export function configExists() {
     if (!existsSync(LOGS)) {
         console.log("LOGS doesn't exists. Creating it now.");
         mkdirSync(LOGS);
+    }
+    if (!existsSync(REDIS_DEFAULT_CONFIG)) {
+        console.log("default redis config doesn't exists. Creating it now.");
+        copyFileSync(__dirname + "/../config/redis.conf", REDIS_DEFAULT_CONFIG);
     }
 }
