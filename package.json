@@ -4,7 +4,6 @@
     "description": "Information Management System",
     "main": "index.js",
     "scripts": {
-        "server": "sh server/server.sh",
         "build": "tsc",
         "watch": "tsc -w",
         "lint": "eslint -c .eslintrc.yml --ext .ts src",

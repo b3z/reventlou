@@ -1,1 +1,0 @@
-we need this directory for the redis .rdb files.
