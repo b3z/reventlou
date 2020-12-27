@@ -1,6 +1,9 @@
 import * as os from "os";
 
 process.env["NODE_CONFIG_DIR"] = os.homedir() + "/.reventlou";
+import { configExists } from "./configHandler";
+
+configExists();
 
 import * as path from "path";
 import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
@@ -10,22 +13,14 @@ import { isValid } from "./validateConfig";
 import { copyToArchive } from "./fileHandler";
 import { log } from "./logger";
 import { runRedis } from "./redisServer";
-import { configExists } from "./configHandler";
-// import * as config from "config";
+import * as config from "config";
 
 // import { Controller } from "./controller"; // this is how we wanna import dude.
 
 let mainWindow: Electron.BrowserWindow;
 let db: Database;
-let config;
 
 async function createWindow(): Promise<void> {
-    // checkt if .reventlou with configs exists. And create config if needed.
-    configExists();
-
-    // if all the config check passend an files were created if needed load config module.
-    config = await import("config");
-
     // run redis server
     runRedis();
 
