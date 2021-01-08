@@ -268,16 +268,16 @@ ipcMain.on("editor:suggest:value", function (_e, _value) {
 // catch item:search from editor with the editors value.
 ipcMain.on("key:search", async function (e, item: string) {
     let res: string[] = [];
-    const pass: String[] = [];
+    const pass: String[][] = [];
     if (!item) {
         clearStatus(); // maybe implement update status so we can save one call over ipc TODO
         addStatus(undefined, "Type to search...");
     } else {
         res = await db.search(item);
-        for (let i = 0; i < res.length; i++) {
+        for (let i = 2; i < res.length; i++) {
             // translate was here
             if (i % 2 === 0 && i !== 0) {
-                pass.push(translate(res[i][1]));
+                pass.push([res[i - 1], translate(res[i][1])]); // passing [hash, translate(data)]
             }
             // log.debug(res[i][1]);
         }

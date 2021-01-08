@@ -67,7 +67,9 @@ ipcRenderer.on('list:update', (e, res) => {
 
     for (const i in res) {
         const li = document.createElement('li');
-        li.innerHTML = res[i];
+        li.innerHTML = res[i][1];
+        li.id = res[i][0]; 
+        li.addEventListener('dblclick', () => {handleEdit(li.id)});
         list.appendChild(li);
     }
 });
@@ -118,5 +120,16 @@ function handleDragOver(evt) {
     evt.stopPropagation();
     evt.preventDefault();
     evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+}
+
+// editing
+
+function handleEdit(id) {
+    console.log(id);
+    // get new input
+
+    // save new note
+    // delete old note
+    
 }
 
