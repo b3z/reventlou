@@ -81,6 +81,18 @@ export class Database {
             );
         });
     }
+
+    public async getNoteByHash(hash: string): Promise<string> {
+        return new Promise<string>((resolve) => {
+            resolve(this.client.redis.send_command("HGET", [hash, "data"]));
+        });
+    }
+
+    public deleteNoteByHash(hash: string) {
+        log.warn(hash);
+        log.warn(this.client.redis.send_command("DEL", [hash]));
+    }
+
     //TODO for now returns nothing TODO make async
     // suggest(input: string): void {
     //     this.client.ft_sugget(["index", input, "FUZZY"], (err: any, result: any) => {

@@ -244,8 +244,26 @@ function clearStatus() {
     mainWindow.webContents.send("statusItem:clear");
 }
 
+let edit: boolean = false;
+let editHash: any = "";
+
+ipcMain.on("notify:edit", (e, hash) => {
+    log.warn("EDIT NOTIFY");
+    edit = true;
+    editHash = hash;
+    log.warn(hash);
+});
+
 // should execute js code in index.html so it send the value of the editor back to us.
 function handleSave() {
+    if (edit) {
+        log.warn("EDIT");
+        // delete old note
+        db.deleteNoteByHash(editHash);
+        // editor normal mode
+        mainWindow.webContents.send("edit:done");
+        edit = false;
+    }
     mainWindow.webContents.send("editor:get:SaveValue");
 }
 
@@ -268,16 +286,16 @@ ipcMain.on("editor:suggest:value", function (_e, _value) {
 // catch item:search from editor with the editors value.
 ipcMain.on("key:search", async function (e, item: string) {
     let res: string[] = [];
-    const pass: String[] = [];
+    const pass: String[][] = [];
     if (!item) {
         clearStatus(); // maybe implement update status so we can save one call over ipc TODO
         addStatus(undefined, "Type to search...");
     } else {
         res = await db.search(item);
-        for (let i = 0; i < res.length; i++) {
+        for (let i = 2; i < res.length; i++) {
             // translate was here
             if (i % 2 === 0 && i !== 0) {
-                pass.push(translate(res[i][1]));
+                pass.push([res[i - 1], translate(res[i][1])]); // passing [hash, translate(data)]
             }
             // log.debug(res[i][1]);
         }
@@ -296,4 +314,8 @@ ipcMain.on("editor:files:save", async (_e: any, files: string[]) => {
     for (const i in files) {
         copyToArchive(files[i]);
     }
+});
+
+ipcMain.on("request:raw:note", async (e: any, hash: string) => {
+    e.sender.send("serve:raw:note", await db.getNoteByHash(hash));
 });
