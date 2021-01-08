@@ -53,14 +53,21 @@ export class Database {
             (err: Error) => {
                 if (err) {
                     log.error(err);
+                    return false;
                 }
             }
         );
 
         // "commit"
-        this.client.save(); // save RDB
+        try {
+            this.client.save(); // save RDB
+        } catch (error) {
+            log.error(error);
+            return false;
+        }
 
         log.debug(md5(data));
+        return true;
     }
 
     public async search(query: string): Promise<string[]> {
