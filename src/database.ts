@@ -1,6 +1,5 @@
 import { md5 } from "./hash";
-import * as redis from "redis";
-import * as redisearch from "redis-redisearch";
+import { Redisearch } from "redis-modules-sdk";
 import * as config from "config";
 import { log } from "./logger";
 
@@ -10,27 +9,36 @@ export class Database {
     public constructor() {
         const port: number = config.get("server.port");
         const host: string = config.get("server.host");
-        this.client = redis.createClient(port, host);
-        this.client.on("connect", function () {
-            log.debug("Connected to redis server: " + host + ":" + port);
+
+        this.client = new Redisearch({
+            host: host,
+            port: port,
         });
-        redisearch(redis);
-        this.client.ft_create(
-            // not sure if numeric is the right type for timestamp but I didn't find a better one.
-            "index STOPWORDS 0 SCHEMA data TEXT timestamp NUMERIC SORTABLE".split(
-                " "
-            ),
-            (err: Error) => {
-                if (err) {
-                    if (err.message == "Index already exists") {
-                        // check for schema already existent
-                        log.debug(err.message);
-                    } else {
-                        log.error(err);
-                    }
-                }
+    }
+
+    public async init() {
+        //Connect to the Redis database with Redisearch module
+        await this.client.connect();
+
+        try {
+            await this.client.create(
+                "index",
+                ["data TEXT", "timestamp NUMERIC"],
+                ["SORTABLE", "STOPWORDS 0"]
+            );
+        } catch (error) {
+            if (
+                error +
+                    "".indexOf(
+                        "Redisearch: ReplyError: Index already exists"
+                    ) !=
+                0
+            ) {
+                log.info("No new index created.");
+            } else {
+                log.error(error);
             }
-        );
+        }
     }
 
     public save(data: string): any {
@@ -40,6 +48,7 @@ export class Database {
         data = data.replace(/\n/g, " \n"); // TODO fix this (#13) in a better way as soon as there is a solution from RediSearch/RediSearch#1749
 
         this.client.ft_add(
+            // TOOD fix to HSET using redis-module-sdk if possible?
             [
                 "index",
                 md5(data),
