@@ -297,3 +297,7 @@ ipcMain.on("editor:files:save", async (_e: any, files: string[]) => {
         copyToArchive(files[i]);
     }
 });
+
+ipcMain.on("request:raw:note", async (e: any, hash: string) => {
+    e.sender.send("serve:raw:note", await db.getNoteByHash(hash));
+});

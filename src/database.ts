@@ -73,8 +73,7 @@ export class Database {
                     "index",
                     "@data:(" + query + ")",
                     "RETURN",
-                    "2",
-                    "hash",
+                    "1",
                     "data",
                     "SORTBY",
                     "timestamp",
@@ -82,6 +81,13 @@ export class Database {
             );
         });
     }
+
+    public async getNoteByHash(hash: string): Promise<string> {
+        return new Promise<string>((resolve) => {
+            resolve(this.client.redis.send_command("HGET", [hash, "data"]));
+        });
+    }
+
     //TODO for now returns nothing TODO make async
     // suggest(input: string): void {
     //     this.client.ft_sugget(["index", input, "FUZZY"], (err: any, result: any) => {

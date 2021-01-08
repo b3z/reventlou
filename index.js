@@ -126,10 +126,19 @@ function handleDragOver(evt) {
 
 function handleEdit(id) {
     console.log(id);
-    // get new input
+
+    ipcRenderer.send('request:raw:note', id);
+
+    ipcRenderer.on('serve:raw:note', (e, note) => {
+        console.log(note);
+    })
+    
+    // get old data
+    // load old data
+    // get new input/modifiy
 
     // save new note
     // delete old note
-    
+
 }
 
