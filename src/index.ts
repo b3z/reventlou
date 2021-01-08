@@ -244,8 +244,26 @@ function clearStatus() {
     mainWindow.webContents.send("statusItem:clear");
 }
 
+let edit: boolean = false;
+let editHash: any = "";
+
+ipcMain.on("notify:edit", (e, hash) => {
+    log.warn("EDIT NOTIFY");
+    edit = true;
+    editHash = hash;
+    log.warn(hash);
+});
+
 // should execute js code in index.html so it send the value of the editor back to us.
 function handleSave() {
+    if (edit) {
+        log.warn("EDIT");
+        // delete old note
+        db.deleteNoteByHash(editHash);
+        // editor normal mode
+        mainWindow.webContents.send("edit:done");
+        edit = false;
+    }
     mainWindow.webContents.send("editor:get:SaveValue");
 }
 

@@ -88,6 +88,11 @@ export class Database {
         });
     }
 
+    public deleteNoteByHash(hash: string) {
+        log.warn(hash);
+        log.warn(this.client.redis.send_command("DEL", [hash]));
+    }
+
     //TODO for now returns nothing TODO make async
     // suggest(input: string): void {
     //     this.client.ft_sugget(["index", input, "FUZZY"], (err: any, result: any) => {

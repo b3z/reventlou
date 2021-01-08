@@ -1,5 +1,7 @@
 const electron = require('electron');
-const {ipcRenderer} = electron;
+const {
+    ipcRenderer
+} = electron;
 
 
 
@@ -42,10 +44,12 @@ ipcRenderer.on('statusItem:clear', (e, statusItem) => {
     statusBar.innerHTML = '';
 });
 
+let searchLock = false;
+
 // listener for editor search on type. On keyrelease send ipc search
 editor.addEventListener("keyup", (e) => {
-    console.log(e)
-    if (e.key !== "Meta") {
+    if (e.key !== "Meta" && !searchLock) {
+        console.log(e)
         ipcRenderer.send('key:search', editor.value);
     }
 });
@@ -68,8 +72,10 @@ ipcRenderer.on('list:update', (e, res) => {
     for (const i in res) {
         const li = document.createElement('li');
         li.innerHTML = res[i][1];
-        li.id = res[i][0]; 
-        li.addEventListener('dblclick', () => {handleEdit(li.id)});
+        li.id = res[i][0];
+        li.addEventListener('dblclick', () => {
+            handleEdit(li.id)
+        });
         list.appendChild(li);
     }
 });
@@ -82,10 +88,11 @@ function toggle(e, c) {
     const classes = e.className.split(" ");
     const i = classes.indexOf(c);
 
-    if (i >= 0)
-        {classes.splice(i, 1);}
-    else
-        {classes.push(c);}
+    if (i >= 0) {
+        classes.splice(i, 1);
+    } else {
+        classes.push(c);
+    }
     e.className = classes.join(" ");
 }
 
@@ -127,18 +134,32 @@ function handleDragOver(evt) {
 function handleEdit(id) {
     console.log(id);
 
+    // get old data
     ipcRenderer.send('request:raw:note', id);
+    ipcRenderer.send('notify:edit', id);
 
     ipcRenderer.on('serve:raw:note', (e, note) => {
-        console.log(note);
-    })
-    
-    // get old data
-    // load old data
-    // get new input/modifiy
-
-    // save new note
-    // delete old note
-
+        // load old data
+        editor.value = note;
+        // get new input/modifiy
+        editorEditMode()
+    });
 }
 
+ipcRenderer.on("edit:done", () => {
+    editorNormalMode()
+})
+
+function editorEditMode() {
+    list.innerHTML = ''; // clear list
+    searchLock = true;
+    editor.style.height = "90%";
+}
+
+function editorNormalMode() {
+    searchLock = false;
+    editor.style.height = "100px";
+
+    // listener for editor search on type. On keyrelease send ipc search
+    
+}
