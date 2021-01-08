@@ -24,8 +24,8 @@ async function createWindow(): Promise<void> {
     // run redis server
     runRedis();
 
-    db = new Database(); // connect with ne db cli.
-    db.init();
+    db = new Database(); // init new db cli.
+    db.init(); // connect and make sure index exists.
 
     // Create the browser window.
     mainWindow = new BrowserWindow({
