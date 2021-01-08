@@ -1,5 +1,9 @@
 # The Information Management System
 
+[![GitHub release](https://img.shields.io/github/release/b3z/reventlou)](https://GitHub.com/b3z/reventlou/releases/)
+[![GitHub issues](https://img.shields.io/github/issues/b3z/reventlou)](https://github.com/b3z/reventlou/issues)
+[![GitHub stars](https://img.shields.io/github/stars/b3z/reventlou)](https://github.com/b3z/reventlou/stargazers)
+
 > This tool is so simple that most people don't understand how to use it.
 
 #### TL;DR
@@ -75,3 +79,6 @@ On the version number MAJOR.MINOR.PATCH those are the meanings:
 1. MAJOR - incompatible API changes.
 2. MINOR - added functionality in a backwards compatible manner.
 3. PATCH - made backwards compatible bug fixes.
+
+### Supporters
+[![Stargazers repo roster for @b3z/reventlou](https://reporoster.com/stars/b3z/reventlou)](https://github.com/b3z/reventlou/stargazers)

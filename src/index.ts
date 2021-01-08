@@ -253,9 +253,9 @@ ipcMain.on("editor:save:value", function (_e, value) {
     clearStatus();
     let status: string;
     if (db.save(value)) {
-        status = "Status: OK";
+        status = "Saved.";
     } else {
-        status = "Status: Failed";
+        status = "Failed to save note.";
     }
     addStatus(undefined, status);
 });
