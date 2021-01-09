@@ -1,13 +1,16 @@
 const electron = require('electron');
+const { resolveModuleName } = require('typescript');
 const {
     ipcRenderer
 } = electron;
+window.$ = window.jQuery = require('jquery');
 
 
 
 const statusBar = document.getElementById("statusBar")
 const editor = document.getElementById('editor');
 const list = document.getElementById('resultList');
+const rmenu = document.getElementById("rmenu");
 
 ipcRenderer.on('editor:get:SaveValue', (e) => {
     e.sender.send('editor:save:value', document.querySelector("#editor").value);
@@ -73,12 +76,66 @@ ipcRenderer.on('list:update', (e, res) => {
         const li = document.createElement('li');
         li.innerHTML = res[i][1];
         li.id = res[i][0];
+
         li.addEventListener('dblclick', () => {
             handleEdit(li.id)
         });
+
+        li.addEventListener('contextmenu', function (e) {
+
+            const deleteNote = document.createElement('p');
+            deleteNote.id = li.id;
+            deleteNote.innerHTML = "Delete"
+            deleteNote.addEventListener("click", () => {
+                //delete note
+                console.log("deleteNote "+ li.id);
+
+                ipcRenderer.send("delete:note", li.id, editor.innerHTML);
+            });
+
+            rmenu.appendChild(deleteNote);
+
+            rmenu.className = "show";
+            rmenu.style.top = mouseY(event) + 'px';
+            rmenu.style.left = mouseX(event) + 'px';
+
+            window.event.returnValue = false;
+        });
+
         list.appendChild(li);
     }
 });
+
+// listen for clicks to hide context menu.
+$(document).bind("click", function (event) {
+    rmenu.className = "hide";
+    rmenu.innerHTML = ""; // clear menu
+
+});
+
+function mouseX(evt) {
+    if (evt.pageX) {
+        return evt.pageX;
+    } else if (evt.clientX) {
+        return evt.clientX + (document.documentElement.scrollLeft ?
+            document.documentElement.scrollLeft :
+            document.body.scrollLeft);
+    } else {
+        return null;
+    }
+}
+
+function mouseY(evt) {
+    if (evt.pageY) {
+        return evt.pageY;
+    } else if (evt.clientY) {
+        return evt.clientY + (document.documentElement.scrollTop ?
+            document.documentElement.scrollTop :
+            document.body.scrollTop);
+    } else {
+        return null;
+    }
+}
 
 ipcRenderer.on('editor:clear', (e) => {
     editor.value = '';
@@ -161,5 +218,5 @@ function editorNormalMode() {
     editor.style.height = "100px";
 
     // listener for editor search on type. On keyrelease send ipc search
-    
+
 }
