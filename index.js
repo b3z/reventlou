@@ -83,8 +83,8 @@ ipcRenderer.on('list:update', (e, res) => {
 
         li.addEventListener('contextmenu', function (e) {
 
-            const deleteNote = document.createElement('p');
-            deleteNote.id = li.id;
+            const deleteNote = document.createElement('div');
+            deleteNote.className = "deleteNote";
             deleteNote.innerHTML = "Delete"
             deleteNote.addEventListener("click", () => {
                 //delete note

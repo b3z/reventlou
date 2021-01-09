@@ -1,13 +1,17 @@
 .show {
     z-index: 1000;
     position: absolute;
-    background-color: #C0C0C0;
-    border: 1px solid blue;
-    padding: 2px;
-    display: block;
-    margin: 0;
+    background-color: rgb(60, 60, 60, 0.95);   
+    box-shadow: 0 0 10px #000000;
+    color: white;
+    border-radius: 6px;
+    padding: 5px;
     list-style-type: none;
     list-style: none;
+  }
+
+  .deleteNote:hover {
+    color: red;
   }
   
   .hide {
