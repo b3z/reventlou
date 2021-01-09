@@ -328,6 +328,6 @@ ipcMain.on(
     "delete:note",
     async (e: any, hash: string, editorContent: string) => {
         await db.deleteNoteByHash(hash);
-        keySearch(e, editorContent);
+        await keySearch(e, editorContent);
     }
 );

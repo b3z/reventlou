@@ -90,7 +90,7 @@ ipcRenderer.on('list:update', (e, res) => {
                 //delete note
                 console.log("deleteNote "+ li.id);
 
-                ipcRenderer.send("delete:note", li.id, editor.innerHTML);
+                ipcRenderer.send("delete:note", li.id, editor.value);
             });
 
             rmenu.appendChild(deleteNote);
