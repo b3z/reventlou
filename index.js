@@ -1,5 +1,4 @@
 const electron = require('electron');
-const { resolveModuleName } = require('typescript');
 const {
     ipcRenderer
 } = electron;
