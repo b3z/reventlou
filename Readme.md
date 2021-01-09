@@ -68,7 +68,14 @@ If certain notes should be grouped it is whise to use hashtags (e.g #WeLoveTurtl
 
 For now that it's here since we are in development. If you want you can read [here](https://zeppel.eu/b/how-ims-works/) about an older IMS version which was slightly different but had the sam fundamentals.
 
+### Build from source
 
+```sh
+git clone https://github.com/b3z/reventlou.git
+cd reventlou
+npm i
+npm start
+```
 
 ### Versioning 
 
