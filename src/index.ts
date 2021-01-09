@@ -284,7 +284,11 @@ ipcMain.on("editor:suggest:value", function (_e, _value) {
 });
 
 // catch item:search from editor with the editors value.
-ipcMain.on("key:search", async function (e, item: string) {
+ipcMain.on("key:search", async (e, item: string) => {
+    keySearch(e, item);
+});
+
+async function keySearch(e: any, item: string) {
     let res: string[] = [];
     const pass: String[][] = [];
     if (!item) {
@@ -304,7 +308,7 @@ ipcMain.on("key:search", async function (e, item: string) {
         addStatus(undefined, `Results: ${res[0]}`);
     }
     e.sender.send("list:update", pass);
-});
+}
 
 function handleClear() {
     mainWindow.webContents.send("editor:clear");
@@ -319,3 +323,11 @@ ipcMain.on("editor:files:save", async (_e: any, files: string[]) => {
 ipcMain.on("request:raw:note", async (e: any, hash: string) => {
     e.sender.send("serve:raw:note", await db.getNoteByHash(hash));
 });
+
+ipcMain.on(
+    "delete:note",
+    async (e: any, hash: string, editorContent: string) => {
+        await db.deleteNoteByHash(hash);
+        await keySearch(e, editorContent);
+    }
+);

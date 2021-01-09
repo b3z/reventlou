@@ -26,6 +26,7 @@
         "electron": "^11.1.0",
         "electron-installer-dmg": "^3.0.0",
         "highlight.js": "^10.2.0",
+        "jquery": "^3.5.1",
         "redis": "^3.0.2",
         "redis-modules-sdk": "^0.1.8",
         "showdown": "^1.9.1",

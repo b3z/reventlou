@@ -88,9 +88,11 @@ export class Database {
         });
     }
 
-    public deleteNoteByHash(hash: string) {
-        log.warn(hash);
-        log.warn(this.client.redis.send_command("DEL", [hash]));
+    public async deleteNoteByHash(hash: string) {
+        const status = await this.client.redis.send_command("DEL", [hash]);
+        if (status != 1) {
+            log.warn("Delete did not succeed. Code " + status);
+        }
     }
 
     //TODO for now returns nothing TODO make async
