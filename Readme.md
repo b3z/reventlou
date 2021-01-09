@@ -84,6 +84,10 @@ npm i
 npm start
 ```
 
+### Tipps
+
+* write `-x` to show all notes in your db. Except those that contain a single `x`.
+
 ### Versioning 
 
 We are using [SemVer](https://semver.org/#summary).
