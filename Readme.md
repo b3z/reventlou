@@ -28,10 +28,11 @@ For **example** you need your rental contract again after a couple years, no pro
 * save text
 * url detection
 * search them all
+* editing and deleting
+
 
 Ideas to come:
 
-* editing and deleting (obviously important)
 * tagging - need to differenciate
 * fuzzy searching
 * suggestion on typing
