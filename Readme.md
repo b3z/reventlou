@@ -47,6 +47,10 @@ Mac: `brew install --cask b3z/small/reventlou`
 
 All other platforms either build from source or open an issue and we will add a binary for your platform.
 
+### Update 
+
+Mac: `brew upgrade --cask reventlou`
+
 **Example how it works**
 
 We save the notes
