@@ -45,7 +45,7 @@ Ideas to come:
 
 Mac: `brew install --cask b3z/small/reventlou`
 
-All other plarforms either build from source or open an issue and we will add a binary for your platform.
+All other platforms either build from source or open an issue and we will add a binary for your platform.
 
 **Example how it works**
 
