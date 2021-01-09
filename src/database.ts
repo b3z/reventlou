@@ -2,7 +2,6 @@ import { md5 } from "./hash";
 import { Redisearch } from "redis-modules-sdk";
 import * as config from "config";
 import { log } from "./logger";
-import { stat } from "fs";
 
 export class Database {
     private client: any;
