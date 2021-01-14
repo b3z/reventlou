@@ -88,6 +88,11 @@ npm start
 
 * write `-x` to show all notes in your db. Except those that contain a single `x`.
 
+### Discussion
+
+#reventlou on [freenode.net](https://webchat.freenode.net) and [matrix.org](https://matrix.to/#/#reventlou:matrix.org?via=matrix.org)
+
+
 ### Versioning 
 
 We are using [SemVer](https://semver.org/#summary).
