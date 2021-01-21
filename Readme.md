@@ -84,7 +84,18 @@ npm i
 npm start
 ```
 
-### Tipps
+### Query Syntax
+
+```
+OR: a|b
+contains a or b
+
+NOT: -a
+everything except notes containing a
+
+Cobinations: a -(b|c)
+contains a but not b and not c
+```
 
 * write `-x` to show all notes in your db. Except those that contain a single `x`.
 
