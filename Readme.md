@@ -40,6 +40,8 @@ Ideas to come:
 * shared databases
   * presets (like e.g. formulas, snippets)
 * API (maybe want to hook it to something?!)
+* web version of this so you can access your archive from everywher
+* mobile app - same reason like web
 
 ### Install
 
