@@ -36,6 +36,8 @@ Ideas to come:
 * tagging - need to differenciate
 * fuzzy searching
 * suggestion on typing
+* encryption for single notes. "unlock with password"
+  * idea: maybe rot by the passwords ascii sum or something like this. (here no recovery)
 * (multiple)remote database support
 * shared databases
   * presets (like e.g. formulas, snippets)
