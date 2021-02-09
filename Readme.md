@@ -103,6 +103,13 @@ contains a but not b and not c
 
 * write `-x` to show all notes in your db. Except those that contain a single `x`.
 
+### Markdown support
+
+I am continously adding markdown rules. Right now those are supported:
+
+* raw http link matching
+* `[text](https://example.com)`
+
 ### Discussion
 
 #reventlou on [freenode.net](https://webchat.freenode.net) and [matrix.org](https://matrix.to/#/#reventlou:matrix.org?via=matrix.org)
