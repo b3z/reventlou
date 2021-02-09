@@ -5,20 +5,12 @@ export function translate(md: string): string {
     //let converter = new Converter();
     //return converter.makeHtml(md);
 
-    //md = linkHTTP(md); // make links clickable
     md = newline(md); // render linebreaks as html
     md = linkFILE(md);
     //md = linkHASH(md);
     md = Markdown.render(md); // apply md rules
     return md;
 }
-
-// function linkHTTP(md: string): string {
-//     const urlRegex = /(https?:\/\/[^\s]+)/g;
-//     return md.replace(urlRegex, (url) => {
-//         return '<a href="' + url + '">' + url + "</a>";
-//     });
-// }
 
 function newline(md: string): string {
     return md.replace(/\n/g, "<br>");
