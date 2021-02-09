@@ -21,11 +21,11 @@ export class Database {
         await this.client.connect();
 
         try {
-            await this.client.create(
-                // need to change this to raw
-                "index",
-                ["data TEXT", "timestamp NUMERIC"],
-                ["SORTABLE", "STOPWORDS 0"]
+            await this.client.redis.send_command(
+                "FT.CREATE",
+                "index STOPWORDS 0 SCHEMA data TEXT timestamp NUMERIC SORTABLE".split(
+                    " "
+                )
             );
         } catch (error) {
             if (
