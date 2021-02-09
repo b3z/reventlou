@@ -75,18 +75,23 @@ async function createWindow(): Promise<void> {
                 } else {
                     if (url.indexOf("explorer:file") != -1) {
                         shell.showItemInFolder(
-                            os.homedir() +
-                                "/.reventlou/" +
-                                `${config.get("file.archive")}/${url}`.replace(
+                            process.env["NODE_CONFIG_DIR"] +
+                                `/${config.get("file.archive")}/${url}`.replace(
                                     "explorer:file://",
                                     ""
                                 )
                         );
                     } else {
                         shell.openPath(
-                            os.homedir() +
-                                "/.reventlou/" +
-                                `${config.get("file.archive")}/${url}`.replace(
+                            process.env["NODE_CONFIG_DIR"] +
+                                `/${config.get("file.archive")}/${url}`.replace(
+                                    "file://",
+                                    ""
+                                )
+                        );
+                        console.log(
+                            process.env["NODE_CONFIG_DIR"] +
+                                `/${config.get("file.archive")}/${url}`.replace(
                                     "file://",
                                     ""
                                 )
