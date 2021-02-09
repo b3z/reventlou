@@ -1,7 +1,6 @@
-import { constants, access } from "fs";
 import { get } from "config";
+import { access, constants } from "fs";
 import { log } from "./logger";
-import * as os from "os";
 
 const fs = require("fs-extra");
 
@@ -24,10 +23,10 @@ export async function exist(filePath: string): Promise<boolean> {
 }
 
 export function copyToArchive(filePath: string) {
+    log.warn(process.env["NODE_CONFIG_DIR"]);
     const filePathArr = filePath.split("/");
     const destination = (
-        os.homedir() +
-        "/.reventlou/" +
+        process.env["NODE_CONFIG_DIR"] + // is equal to os.homedir + specified dotpath in index.ts
         get("file.archive") +
         "/" +
         filePathArr[filePathArr.length - 1]

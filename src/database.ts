@@ -22,6 +22,7 @@ export class Database {
 
         try {
             await this.client.create(
+                // need to change this to raw
                 "index",
                 ["data TEXT", "timestamp NUMERIC"],
                 ["SORTABLE", "STOPWORDS 0"]
@@ -32,9 +33,10 @@ export class Database {
                     "".indexOf(
                         "Redisearch: ReplyError: Index already exists"
                     ) !=
-                0
+                -1
             ) {
                 log.info("No new index created.");
+                log.warn(error);
             } else {
                 log.error(error);
             }

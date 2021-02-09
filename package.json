@@ -7,7 +7,7 @@
         "build": "tsc",
         "watch": "tsc -w",
         "lint": "eslint -c .eslintrc.yml --ext .ts src",
-        "start": "npm run build && electron ./dist/index.js",
+        "start": "npm run build && electron ./dist/index.js -p .reventlou_dev",
         "clean": "rm -rf node_modules",
         "reinstall": "npm run clean && npm install",
         "rebuild node part": "npm run clean && npm install && npm run build",
