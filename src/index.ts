@@ -15,6 +15,8 @@ import { log } from "./logger";
 import { runRedis } from "./redisServer";
 import * as config from "config";
 
+log.info("Version " + app.getVersion());
+
 // import { Controller } from "./controller"; // this is how we wanna import dude.
 
 let mainWindow: Electron.BrowserWindow;
@@ -30,7 +32,7 @@ async function createWindow(): Promise<void> {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         height: 600,
-        title: "Information Management System",
+        title: "reventlou " + app.getVersion(),
         webPreferences: {
             nodeIntegration: true, // with this set we have nodeIntegration in index.html. No need to use require.js anymore.
         },
