@@ -1,32 +1,24 @@
-// // import * as highlight from "highlight.js";
-// // import { Converter } from "showdown";
-// // import { networkInterfaces } from "os";#
-// import { log } from "./logger";
-
+import * as Markdown from "./markdown";
 export function translate(md: string): string {
     // this is nice but we need to rewrite a lot for md and code syntax highlighting
     // never the less it is planed for the future. But first I need a running ims.
     //let converter = new Converter();
     //return converter.makeHtml(md);
 
-    // md = newline(md);
-    md = linkHTTP(md); // make links clickable
+    //md = linkHTTP(md); // make links clickable
     md = newline(md); // render linebreaks as html
     md = linkFILE(md);
     //md = linkHASH(md);
+    md = Markdown.render(md); // apply md rules
     return md;
 }
 
-// function newline(md: string): string {
-//     return md.replace(/\n/g, "<br>");
+// function linkHTTP(md: string): string {
+//     const urlRegex = /(https?:\/\/[^\s]+)/g;
+//     return md.replace(urlRegex, (url) => {
+//         return '<a href="' + url + '">' + url + "</a>";
+//     });
 // }
-
-function linkHTTP(md: string): string {
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    return md.replace(urlRegex, (url) => {
-        return '<a href="' + url + '">' + url + "</a>";
-    });
-}
 
 function newline(md: string): string {
     return md.replace(/\n/g, "<br>");
