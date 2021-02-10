@@ -77,8 +77,6 @@ result:   "Apple.com is the website of a huge company."
 
 If certain notes should be grouped it is whise to use hashtags (e.g #WeLoveTurtles or #work) fot tieing them together.
 
-For now that it's here since we are in development. If you want you can read [here](https://zeppel.eu/b/how-ims-works/) about an older IMS version which was slightly different but had the sam fundamentals.
-
 ### Build from source
 
 ```sh
