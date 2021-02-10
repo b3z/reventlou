@@ -1,8 +1,19 @@
 import { spawn } from "child_process";
 import { log } from "./logger";
+import { unlink, readFile, writeFile } from "fs";
+import { homedir } from "os";
+
+const DOT_R_PATH = process.env["NODE_CONFIG_DIR"]; // see index.
+const DIR = __dirname; // actual directory the app is running in.
+const RS_PATH = DIR + "/../Resources/app/server/modules"; // Redisearch path.
+const REDIS_SERVER_PATH = DIR + "/../Resources/app/server/redis-server";
+const REDIS_TMP_CONF = DOT_R_PATH + "/db/redis.tmp.conf";
+const REDIS_CONF = DOT_R_PATH + "/db/redis.conf";
+const HOME = homedir(); // $HOME
 
 export function runRedis(): void {
-    const redis = spawn("sh", [__dirname + "/../server/server.sh"]);
+    setupServer();
+    const redis = spawn(REDIS_SERVER_PATH, [REDIS_TMP_CONF]);
 
     redis.stdout.on("data", (data) => {
         log.info(`[REDIS] ${data}`);
@@ -18,5 +29,30 @@ export function runRedis(): void {
 
     redis.on("close", (code) => {
         console.info(`[REDIS] child process exited with code ${code}`);
+    });
+}
+
+function setupServer(): void {
+    // delete old redis tmp config.
+    unlink(REDIS_TMP_CONF, (err) => {
+        if (err) {
+            log.error(err);
+        }
+    });
+
+    // replace config variables
+    readFile(REDIS_CONF, "utf8", (err, data) => {
+        if (err) {
+            return log.error(err);
+        }
+        let result = data.replace("MY_HOME", HOME);
+        result = data.replace("DOT_REVENTLOU", DOT_R_PATH);
+        result = data.replace("RS_PATH", RS_PATH);
+
+        writeFile(REDIS_TMP_CONF, result, "utf8", function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        });
     });
 }
