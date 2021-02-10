@@ -95,6 +95,10 @@ contains a or b
 NOT: -a
 everything except notes containing a
 
+Wildcard: water*
+everything that starts with water... e.g. match waterfall
+the wildcard needs at least three letters
+
 Cobinations: a -(b|c)
 contains a but not b and not c
 ```
