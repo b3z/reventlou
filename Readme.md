@@ -34,7 +34,7 @@ For **example** you need your rental contract again after a couple years, no pro
 Ideas to come:
 
 * full markdown support
-  * for people who want to work on this - I already habe the regex for most of the elements. So it will be an easy task.
+  * for people who want to work on this - I already have the regex for most of the elements. So it will be an easy task.
 * tagging - need to differentiate
 * fuzzy searching
 * suggestion on typing
