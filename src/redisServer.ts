@@ -45,9 +45,10 @@ function setupServer(): void {
         if (err) {
             return log.error(err);
         }
+
         let result = data.replace("MY_HOME", HOME);
-        result = data.replace("DOT_REVENTLOU", DOT_R_PATH);
-        result = data.replace("RS_PATH", RS_PATH);
+        result = result.replace("DOT_REVENTLOU", DOT_R_PATH);
+        result = result.replace("RS_PATH", RS_PATH);
 
         writeFile(REDIS_TMP_CONF, result, "utf8", function (err) {
             if (err) {
