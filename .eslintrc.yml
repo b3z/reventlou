@@ -3,17 +3,11 @@ parser: '@typescript-eslint/parser'
 plugins:
   - '@typescript-eslint'
   - babel
-  - react
   - json
   - jsdoc
 
-settings:
-  react:
-    version: '16.3'
-
 extends:
   - prettier
-  - prettier/react
   - plugin:@typescript-eslint/recommended
   - prettier/@typescript-eslint
 
@@ -99,17 +93,6 @@ rules:
 
   # Babel
   babel/no-invalid-this: error
-
-  # React
-  react/jsx-boolean-value:
-    - error
-    - always
-  react/jsx-key: error
-  react/jsx-no-bind: error
-  react/no-string-refs: error
-  react/jsx-uses-vars: error
-  react/jsx-uses-react: error
-  react/no-unused-state: error
 
   # JSDoc
   jsdoc/check-alignment: error
