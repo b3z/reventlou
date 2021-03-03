@@ -23,7 +23,7 @@
         "@types/config": "0.0.38",
         "@types/showdown": "^1.9.3",
         "config": "^3.3.1",
-        "electron": "^11.1.0",
+        "electron": "^12.0.0",
         "electron-installer-dmg": "^3.0.0",
         "highlight.js": "^10.2.0",
         "jquery": "^3.5.1",
