@@ -21,10 +21,11 @@ export class Database {
         await this.client.connect();
 
         try {
-            await this.client.create(
-                "index",
-                ["data TEXT", "timestamp NUMERIC"],
-                ["SORTABLE", "STOPWORDS 0"]
+            await this.client.redis.send_command(
+                "FT.CREATE",
+                "index STOPWORDS 0 SCHEMA data TEXT timestamp NUMERIC SORTABLE".split(
+                    " "
+                )
             );
         } catch (error) {
             if (
@@ -32,9 +33,10 @@ export class Database {
                     "".indexOf(
                         "Redisearch: ReplyError: Index already exists"
                     ) !=
-                0
+                -1
             ) {
                 log.info("No new index created.");
+                log.warn(error);
             } else {
                 log.error(error);
             }
