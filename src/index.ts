@@ -65,7 +65,7 @@ async function createWindow(): Promise<void> {
                     if (url.indexOf("explorer:file") != -1) {
                         shell.showItemInFolder(
                             os.homedir() +
-                                "/.reventlou/" +
+                                "/.reventlou/" + //! WIN dotfile issue
                                 `${config.get("file.archive")}/${url}`.replace(
                                     "explorer:file://",
                                     ""
@@ -74,7 +74,7 @@ async function createWindow(): Promise<void> {
                     } else {
                         shell.openPath(
                             os.homedir() +
-                                "/.reventlou/" +
+                                "/.reventlou/" + //! WIN dotfile issue
                                 `${config.get("file.archive")}/${url}`.replace(
                                     "file://",
                                     ""
@@ -199,7 +199,7 @@ if (process.env.NODE_ENV !== "production") {
             {
                 label: "Icon Status Item",
                 click() {
-                    addStatus("assets/icons/png/icon.png", undefined);
+                    addStatus("assets/icons/png/icon.png", undefined); //! WIN this should work fine?
                 },
             },
             {
@@ -280,6 +280,7 @@ ipcMain.on("editor:save:value", function (_e, value) {
     addStatus(undefined, status);
 });
 
+// autosuggestion
 ipcMain.on("editor:suggest:value", function (_e, _value) {
     // db.suggest(value);
     log.debug("Needs implementation."); // TODO --> see db, github #1

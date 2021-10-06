@@ -1,3 +1,4 @@
+#! Build for linux/mac
 # build redis
 echo "building redis      ------------------------------------"
 wget https://download.redis.io/releases/redis-6.0.9.tar.gz

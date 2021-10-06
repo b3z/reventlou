@@ -16,6 +16,6 @@ if (!get("log.silent")) {
 
 log.appenders.set("everything", {
     type: "file",
-    filename: os.homedir() + "/.reventlou/logs/" + get("log.file"),
+    filename: os.homedir() + "/.reventlou/logs/" + get("log.file"), //! WIN - dotfile
 });
-log.info(`Logging path: ${os.homedir()}/.reventlou/logs/${get("log.file")}`);
+log.info(`Logging path: ${os.homedir()}/.reventlou/logs/${get("log.file")}`); //! - WIN dotfile

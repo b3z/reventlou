@@ -24,6 +24,7 @@ export async function exist(filePath: string): Promise<boolean> {
 }
 
 export function copyToArchive(filePath: string) {
+    //! WIN - dotfile issue again.
     const filePathArr = filePath.split("/");
     const destination = (
         os.homedir() +
