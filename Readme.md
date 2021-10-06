@@ -115,7 +115,7 @@ I am continously adding markdown rules. Right now those are supported:
 
 ### Discussion
 
-#reventlou on [freenode.net](https://webchat.freenode.net) and [matrix.org](https://matrix.to/#/#reventlou:matrix.org?via=matrix.org)
+#reventlou on [libera.chat](https://libera.chat) and [matrix.org](https://matrix.to/#/#reventlou:matrix.org?via=matrix.org)
 
 
 ### Versioning 
