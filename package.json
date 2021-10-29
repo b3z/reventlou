@@ -20,7 +20,7 @@
     "license": "MIT",
     "dependencies": {
         "@tsed/logger": "^5.5.3",
-        "@types/config": "0.0.39",
+        "@types/config": "0.0.40",
         "@types/showdown": "^1.9.3",
         "config": "^3.3.1",
         "electron": "^15.0.0",
