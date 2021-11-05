@@ -19,7 +19,7 @@
     "author": "b3z",
     "license": "MIT",
     "dependencies": {
-        "@tsed/logger": "^5.5.3",
+        "@tsed/logger": "^6.0.0",
         "@types/config": "0.0.40",
         "@types/showdown": "^1.9.3",
         "config": "^3.3.1",
