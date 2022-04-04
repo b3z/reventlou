@@ -42,6 +42,6 @@
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-jsdoc": "^38.0.4",
         "eslint-plugin-json": "^3.0.0",
-        "prettier": "2.5.1"
+        "prettier": "2.6.2"
     }
 }
