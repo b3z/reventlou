@@ -21,7 +21,7 @@
     "dependencies": {
         "@tsed/logger": "^6.0.0",
         "@types/config": "0.0.41",
-        "@types/showdown": "^1.9.3",
+        "@types/showdown": "^2.0.0",
         "config": "^3.3.1",
         "electron": "^18.0.1",
         "electron-installer-dmg": "^3.0.0",
