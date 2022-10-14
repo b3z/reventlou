@@ -1,9 +1,22 @@
 import * as os from "os";
 
-process.env["NODE_CONFIG_DIR"] = os.homedir() + "/.reventlou";
+let dot_path = ".reventlou";
+
+// allows to set the dotfile path via paramter -p
+const args: any = process.argv; // expect String[]
+// eslint-disable-next-line prefer-const
+for (let i = 2; i < args.length; ++i) {
+    if (args[i] == "-p") {
+        dot_path = args[i + 1];
+        console.log("Set dotfile directory to /" + args[i + 1]);
+    }
+}
+
+process.env["NODE_CONFIG_DIR"] = os.homedir() + "/" + dot_path;
 import { configExists } from "./configHandler";
 
-configExists();
+// make sure all configuration files and directories exist.
+configExists(dot_path);
 
 import * as path from "path";
 import { app, BrowserWindow, Menu, ipcMain, shell } from "electron";
@@ -27,7 +40,7 @@ async function createWindow(): Promise<void> {
     runRedis();
 
     db = new Database(); // init new db cli.
-    db.init(); // connect and make sure index exists.
+    await db.init(); // connect and make sure index exists.
 
     // Create the browser window.
     mainWindow = new BrowserWindow({
@@ -64,18 +77,23 @@ async function createWindow(): Promise<void> {
                 } else {
                     if (url.indexOf("explorer:file") != -1) {
                         shell.showItemInFolder(
-                            os.homedir() +
-                                "/.reventlou/" +
-                                `${config.get("file.archive")}/${url}`.replace(
+                            process.env["NODE_CONFIG_DIR"] +
+                                `/${config.get("file.archive")}/${url}`.replace(
                                     "explorer:file://",
                                     ""
                                 )
                         );
                     } else {
                         shell.openPath(
-                            os.homedir() +
-                                "/.reventlou/" +
-                                `${config.get("file.archive")}/${url}`.replace(
+                            process.env["NODE_CONFIG_DIR"] +
+                                `/${config.get("file.archive")}/${url}`.replace(
+                                    "file://",
+                                    ""
+                                )
+                        );
+                        console.log(
+                            process.env["NODE_CONFIG_DIR"] +
+                                `/${config.get("file.archive")}/${url}`.replace(
                                     "file://",
                                     ""
                                 )
