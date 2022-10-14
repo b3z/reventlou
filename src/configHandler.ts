@@ -1,6 +1,9 @@
 import * as os from "os";
 import { existsSync, mkdirSync, copyFileSync } from "fs";
 
+// ! WIN
+// ! This has to be changed I have no idea how to handle this on windows.
+// ! They don't seem to use dotfiles.
 const DOT_R_PATH = os.homedir() + "/.reventlou";
 const DEFAULT_CONFIG = DOT_R_PATH + "/default.json5";
 const REDIS_DEFAULT_CONFIG = DOT_R_PATH + "/db/redis.conf";
@@ -18,7 +21,7 @@ export function configExists() {
     }
     if (!existsSync(DEFAULT_CONFIG)) {
         console.log("default config doesn't exists. Creating it now.");
-        copyFileSync(__dirname + "/../config/default.json5", DEFAULT_CONFIG);
+        copyFileSync(__dirname + "/../config/default.json5", DEFAULT_CONFIG); // ! WIN
     }
     if (!existsSync(ARCHIVE)) {
         console.log("archive doesn't exists. Creating it now.");
@@ -34,6 +37,6 @@ export function configExists() {
     }
     if (!existsSync(REDIS_DEFAULT_CONFIG)) {
         console.log("default redis config doesn't exists. Creating it now.");
-        copyFileSync(__dirname + "/../config/redis.conf", REDIS_DEFAULT_CONFIG);
+        copyFileSync(__dirname + "/../config/redis.conf", REDIS_DEFAULT_CONFIG); // ! WIN
     }
 }

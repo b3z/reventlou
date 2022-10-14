@@ -1,3 +1,4 @@
+#! WIN - this won't run in windows. Maybe solved by using external server.
 # Replaces paths in redis config with the current and starts redis server.
 # Not the best solution but it works.
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
